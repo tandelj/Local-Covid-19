@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<City>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To LocalCovid</h1>
+</div>
+<hr>
+<hr>
+<div>
+    <h4>Import Data From CSV File </h4><button type="button" onclick="location.href='@Url.Action("Upload", "Files")'">Import Data </button>
+</div>
+<hr>
+<br/>
+<h4>Select a city to view its Available data</h4>
+<div>
+    <form method="post">
+        <label for="Cities"><h5>Cities:</h5></label><br />
+        <select name="City" id="Id" class="city">
+            @foreach (var city in Model)
+            {
+                <option value=@city.Id>
+                    @city.CityName
+                </option>
+            }
+
+        </select>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+    var id;
+    $(document).ready(function () {
+        $("select.city").change(function () {
+            var selectedCity = $(this).children("option:selected").val();
+            var url = "Cities/View/".concat(selectedCity);
+            window.location.href = url;
+        });
+    });
+</script>

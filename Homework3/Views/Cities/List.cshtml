@@ -1,0 +1,17 @@
+﻿@model List<City>
+@{
+    ViewData["Title"] = "Cities List";
+}
+<h4>Citites</h4>
+<br />
+<a asp-controller="Cities" asp-action="Add"><button>Add City</button></a>
+<br />
+<br />
+<ul>
+    @foreach (var city in Model)
+    {
+        <li>
+            <a asp-controller="Cities" asp-action="View" asp-route-id="@city.Id">@city.CityName</a>
+        </li>
+    }
+</ul>

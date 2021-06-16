@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Import Data";
+}
+
+<form method="post" enctype="multipart/form-data">
+    CSV File: <input name="file" type="file">
+    <br />
+    <br />
+    <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" name="date">
+    </div>
+    <button>Upload</button>
+</form>
+

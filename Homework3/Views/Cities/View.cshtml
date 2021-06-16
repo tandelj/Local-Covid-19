@@ -1,0 +1,77 @@
+﻿@model City
+@{
+    ViewData["Title"] = Model.CityName;
+}
+
+@section StyleSheets{
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+}
+
+<h1>@Model.CityName </h1>
+<h3>Population - @ViewBag.Population</h3><hr>
+<br />
+
+<div class="cases"><h4>Cases</h4></div><hr>
+<div class="deaths"><h4>Deaths</h4></div><hr>
+<div class="tested"><h4>Tested</h4></div><hr>
+
+
+@section Scripts{
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script>
+        var data = {
+
+            labels: @Json.Serialize(ViewBag.Dates),
+
+            series: [
+                @Json.Serialize(ViewBag.Cases)
+            ]
+        };
+        new Chartist.Line('.cases', data);
+    </script>
+    <script>
+        var data = {
+
+            labels: @Json.Serialize(ViewBag.Dates),
+
+            series: [
+                @Json.Serialize(ViewBag.Deaths)
+            ]
+        };
+        new Chartist.Line('.deaths', data);
+    </script>
+    <script>
+        var data = {
+
+            labels: @Json.Serialize(ViewBag.Dates),
+
+            series: [
+                @Json.Serialize(ViewBag.Tested)
+            ]
+        };
+        new Chartist.Line('.tested', data);
+    </script>
+
+}
+
+<div>
+    <h4>Available data</h4>
+    <table class="table">
+        <tr>
+            <th role="columnheader">Date</th>
+            <th role="columnheader">Cases</th>
+            <th role="columnheader">Deaths</th>
+            <th role="columnheader">Tested</th>
+        </tr>
+        @foreach (var data in Model.Datas)
+        {
+            <tr>
+                <td>@data.Date.ToString("d")</td>
+                <td>@data.Cases</td>
+                <td>@data.Deaths</td>
+                <td>@data.Tested</td>
+            </tr>
+        }
+    </table>
+</div>
+
